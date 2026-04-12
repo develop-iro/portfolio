@@ -1,0 +1,119 @@
+---
+---
+
+<!-- Only rendered visually on devices with a precise pointer (mouse) -->
+<div id="c-dot" aria-hidden="true"></div>
+<div id="c-ring" aria-hidden="true"></div>
+
+<!-- Hide native cursor site-wide on pointer devices -->
+<style is:global>
+  @media (hover: hover) and (pointer: fine) {
+    *, *::before, *::after {
+      cursor: none !important;
+    }
+  }
+</style>
+
+<style>
+  #c-dot,
+  #c-ring {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    border-radius: 50%;
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  #c-dot {
+    width: 8px;
+    height: 8px;
+    background: #3b82f6;
+    transition: opacity 0.2s ease, background-color 0.15s ease, transform 0.08s linear;
+  }
+
+  #c-ring {
+    width: 36px;
+    height: 36px;
+    border: 2px solid rgba(59, 130, 246, 0.55);
+    transition: opacity 0.2s ease, border-color 0.2s ease;
+  }
+
+  /* Don't show on touch/coarse devices */
+  @media (hover: none), (pointer: coarse) {
+    #c-dot,
+    #c-ring {
+      display: none;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    var dot = document.getElementById('c-dot');
+    var ring = document.getElementById('c-ring');
+    if (!dot || !ring) return;
+
+    var HALF_DOT = 4;
+    var HALF_RING = 18;
+    var LERP_POS = 0.12;
+    var LERP_SCALE = 0.14;
+
+    var mx = 0, my = 0;
+    var rx = 0, ry = 0;
+    var ringScale = 1, targetScale = 1;
+    var visible = false;
+
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    document.addEventListener('mousemove', function (e) {
+      mx = e.clientX;
+      my = e.clientY;
+
+      if (!visible) {
+        visible = true;
+        rx = mx; ry = my;
+        dot.style.opacity = '1';
+        ring.style.opacity = '1';
+      }
+
+      dot.style.transform = 'translate(' + (mx - HALF_DOT) + 'px,' + (my - HALF_DOT) + 'px)';
+    }, { passive: true });
+
+    document.addEventListener('mouseleave', function () {
+      dot.style.opacity = '0';
+      ring.style.opacity = '0';
+      visible = false;
+    });
+
+    // Expand ring over clickable elements
+    document.addEventListener('mouseover', function (e) {
+      var el = e.target;
+      if (el && el.closest && el.closest('a,button,[role="button"],input,textarea,select,label')) {
+        targetScale = 1.65;
+        ring.style.borderColor = 'rgba(59,130,246,0.9)';
+        dot.style.backgroundColor = '#1d4ed8';
+      } else {
+        targetScale = 1;
+        ring.style.borderColor = 'rgba(59,130,246,0.55)';
+        dot.style.backgroundColor = '#3b82f6';
+      }
+    });
+
+    // RAF loop — lerp ring position and scale
+    function tick() {
+      rx = lerp(rx, mx, LERP_POS);
+      ry = lerp(ry, my, LERP_POS);
+      ringScale = lerp(ringScale, targetScale, LERP_SCALE);
+      ring.style.transform =
+        'translate(' + (rx - HALF_RING) + 'px,' + (ry - HALF_RING) + 'px) scale(' + ringScale + ')';
+      requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  })();
+</script>

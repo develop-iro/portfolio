@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ResumePage from '../../features/resume/ResumePage.astro';
+import { useTranslations } from '../../shared/i18n/translations';
+
+const lang = 'en' as const;
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+  title="Resume — Ivan Romero"
+  description="Resume of Ivan Romero, Frontend Engineer specialising in Web Components, Ember.js, and modern frontend architecture."
+  lang={lang}
+>
+  <ResumePage lang={lang} t={t} />
+</BaseLayout>

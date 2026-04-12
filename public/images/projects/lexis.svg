@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <rect width="800" height="450" fill="#0f172a"/>
+  <!-- Subtle grid -->
+  <line x1="0" y1="150" x2="800" y2="150" stroke="#1e293b" stroke-width="1"/>
+  <line x1="0" y1="300" x2="800" y2="300" stroke="#1e293b" stroke-width="1"/>
+  <line x1="200" y1="0" x2="200" y2="450" stroke="#1e293b" stroke-width="1"/>
+  <line x1="400" y1="0" x2="400" y2="450" stroke="#1e293b" stroke-width="1"/>
+  <line x1="600" y1="0" x2="600" y2="450" stroke="#1e293b" stroke-width="1"/>
+  <!-- Blue accent bar -->
+  <rect x="320" y="155" width="160" height="3" rx="1.5" fill="#2563eb"/>
+  <!-- Title -->
+  <text x="400" y="220" font-family="Inter, system-ui, sans-serif" font-size="52" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="-2">Lexis</text>
+  <!-- Subtitle -->
+  <text x="400" y="265" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="400" fill="#64748b" text-anchor="middle">Accounting &amp; Consulting · Astro + React</text>
+  <!-- Tags -->
+  <rect x="238" y="300" width="90" height="28" rx="14" fill="#1e40af" opacity="0.4"/>
+  <text x="283" y="319" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#93c5fd" text-anchor="middle">Astro</text>
+  <rect x="340" y="300" width="80" height="28" rx="14" fill="#1e40af" opacity="0.4"/>
+  <text x="380" y="319" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#93c5fd" text-anchor="middle">React</text>
+  <rect x="432" y="300" width="130" height="28" rx="14" fill="#1e40af" opacity="0.4"/>
+  <text x="497" y="319" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#93c5fd" text-anchor="middle">Framer Motion</text>
+</svg>

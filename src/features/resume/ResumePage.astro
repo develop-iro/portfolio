@@ -1,0 +1,279 @@
+---
+import type { Lang, UIKey } from '../../shared/i18n/translations';
+import { experience } from '../experience/data';
+import { skills } from '../skills/data';
+
+interface Props {
+  t: (key: UIKey) => string;
+  lang: Lang;
+}
+
+const { t, lang } = Astro.props;
+
+const otherLang = lang === 'en' ? 'es' : 'en';
+const otherLangLabel = lang === 'en' ? 'ES' : 'EN';
+
+const skillsByCategory = skills.reduce<Record<string, typeof skills>>((acc, skill) => {
+  if (!acc[skill.category]) acc[skill.category] = [];
+  acc[skill.category].push(skill);
+  return acc;
+}, {});
+
+const education = [
+  {
+    degree: { en: 'Higher Technician in Web Application Development', es: 'Técnico Superior en Desarrollo de Aplicaciones Web' },
+    institution: 'IES Virrey Morcillo',
+    location: 'Villarrobledo, Spain',
+    startDate: '2020-09',
+    endDate: '2022-01',
+  },
+];
+
+function formatDate(dateStr: string, locale: string): string {
+  const [year, month] = dateStr.split('-');
+  return new Date(Number(year), Number(month) - 1).toLocaleDateString(
+    locale === 'es' ? 'es-ES' : 'en-US',
+    { month: 'short', year: 'numeric' }
+  );
+}
+
+const proficiencyOrder = { expert: 0, advanced: 1, intermediate: 2, beginner: 3 };
+---
+
+<div class="min-h-screen bg-white dark:bg-gray-900">
+  <!-- Top bar -->
+  <div class="sticky top-0 z-40 bg-white/90 dark:bg-gray-900/90 backdrop-blur border-b border-gray-200 dark:border-gray-700 print:hidden">
+    <div class="max-w-4xl mx-auto px-4 h-14 flex items-center justify-between gap-4">
+      <a
+        href={`/${lang}/`}
+        class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline shrink-0"
+      >
+        {t('resume.back')}
+      </a>
+
+      <div class="flex items-center gap-3">
+        <!-- Language toggle -->
+        <a
+          href={`/${otherLang}/resume`}
+          class="text-xs font-semibold text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
+          aria-label={`Switch to ${otherLangLabel}`}
+        >
+          {otherLangLabel}
+        </a>
+
+        <button
+          onclick="window.print()"
+          class="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors flex items-center gap-1.5"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+          </svg>
+          {t('resume.print')}
+        </button>
+
+        <a
+          href="/resume.pdf"
+          download
+          class="px-4 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium rounded-lg transition-colors flex items-center gap-1.5"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
+          </svg>
+          {t('resume.download')}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main class="max-w-4xl mx-auto px-4 py-12 print:py-0 print:max-w-none">
+
+    <!-- Header -->
+    <header class="mb-10 print:mb-6">
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-white print:text-black">Ivan Romero Matallana</h1>
+      <p class="mt-1 text-xl text-blue-600 dark:text-blue-400 font-medium print:text-blue-700">
+        {lang === 'en' ? 'Frontend Engineer' : 'Ingeniero Frontend'}
+      </p>
+
+      <!-- Contact row -->
+      <div class="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-500 dark:text-gray-400 print:text-gray-600">
+        <a href="mailto:iro.developer@hotmail.com" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+          iro.developer@hotmail.com
+        </a>
+        <span>(+34) 642 088 767</span>
+        <a
+          href="https://github.com/develop-iro"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        >
+          github.com/develop-iro
+        </a>
+        <a
+          href="https://www.linkedin.com/in/ivan-ccamilo/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        >
+          linkedin.com/in/ivan-ccamilo
+        </a>
+        <span>Madrid, Spain</span>
+      </div>
+
+      <div class="mt-4 h-px bg-gray-200 dark:bg-gray-700 print:bg-gray-300"></div>
+    </header>
+
+    <!-- Two-column layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-10 print:grid-cols-[1fr_220px] print:gap-6">
+
+      <!-- Left: Summary + Experience + Education -->
+      <div class="space-y-10 print:space-y-6">
+
+        <!-- Summary -->
+        <section>
+          <h2 class="text-xs font-bold tracking-widest uppercase text-blue-600 dark:text-blue-400 mb-3 print:text-blue-700">
+            {t('resume.summary')}
+          </h2>
+          <p class="text-gray-600 dark:text-gray-300 leading-relaxed text-sm print:text-gray-700">
+            {lang === 'en'
+              ? 'Frontend Engineer with 3+ years at BBVA Technology, contributing to the team-wide migration of a large-scale banking app from Ember.js to Web Components (Lit). Our team leveraged AI tools and models (GitHub Copilot, Cursor, Codex) to automate component migration and repetitive tasks. Active in performance optimisation and mentoring. Looking to grow towards fullstack development. Fluent in Spanish and English.'
+              : 'Ingeniero Frontend con más de 3 años en BBVA Technology, contribuyendo junto al equipo a la migración de una aplicación bancaria de gran escala de Ember.js a Web Components (Lit). El equipo utilizó herramientas y modelos de IA (GitHub Copilot, Cursor, Codex) para automatizar la migración de componentes y tareas repetitivas. Activo en optimización del rendimiento y mentoría. Interés en crecer hacia el desarrollo fullstack.'
+            }
+          </p>
+        </section>
+
+        <!-- Experience -->
+        <section>
+          <h2 class="text-xs font-bold tracking-widest uppercase text-blue-600 dark:text-blue-400 mb-4 print:text-blue-700">
+            {t('resume.experience')}
+          </h2>
+
+          <div class="space-y-8 print:space-y-5">
+            {experience.map((job) => {
+              const start = formatDate(job.startDate, lang);
+              const end = job.endDate ? formatDate(job.endDate, lang) : t('exp.present');
+              const title = job.title[lang];
+              const responsibilities = job.responsibilities[lang];
+              return (
+                <div>
+                  <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5">
+                    <div>
+                      <span class="font-semibold text-gray-900 dark:text-white print:text-black">{title}</span>
+                      <span class="text-gray-500 dark:text-gray-400 print:text-gray-600"> — </span>
+                      <a
+                        href={job.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-blue-600 dark:text-blue-400 hover:underline font-medium print:text-blue-700"
+                      >
+                        {job.company}
+                      </a>
+                    </div>
+                    <span class="text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap print:text-gray-500">
+                      {start} – {end}
+                    </span>
+                  </div>
+                  <ul class="mt-2 space-y-1">
+                    {responsibilities.map((r) => (
+                      <li class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed pl-3 relative before:absolute before:left-0 before:top-[0.55em] before:w-1 before:h-1 before:rounded-full before:bg-blue-500 print:text-gray-700">
+                        {r}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        <!-- Education -->
+        <section>
+          <h2 class="text-xs font-bold tracking-widest uppercase text-blue-600 dark:text-blue-400 mb-4 print:text-blue-700">
+            {t('resume.education')}
+          </h2>
+          <div class="space-y-4">
+            {education.map((edu) => {
+              const start = formatDate(edu.startDate, lang);
+              const end = formatDate(edu.endDate, lang);
+              return (
+                <div>
+                  <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5">
+                    <div>
+                      <span class="font-semibold text-gray-900 dark:text-white print:text-black">{edu.degree[lang]}</span>
+                    </div>
+                    <span class="text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap print:text-gray-500">
+                      {start} – {end}
+                    </span>
+                  </div>
+                  <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5 print:text-gray-600">
+                    {edu.institution} · {edu.location}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Right: Skills + Languages -->
+      <div class="space-y-8 print:space-y-5">
+
+        <!-- Skills -->
+        <section>
+          <h2 class="text-xs font-bold tracking-widest uppercase text-blue-600 dark:text-blue-400 mb-4 print:text-blue-700">
+            {t('resume.skills')}
+          </h2>
+
+          <div class="space-y-5 print:space-y-3">
+            {Object.entries(skillsByCategory).map(([category, categorySkills]) => (
+              <div>
+                <h3 class="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2 print:text-gray-600">{category}</h3>
+                <div class="flex flex-wrap gap-1.5">
+                  {categorySkills
+                    .sort((a, b) => (proficiencyOrder[a.proficiency ?? 'beginner'] ?? 3) - (proficiencyOrder[b.proficiency ?? 'beginner'] ?? 3))
+                    .map((skill) => (
+                      <span class={`text-xs px-2 py-0.5 rounded-full font-medium
+                        ${skill.proficiency === 'expert'
+                          ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-200 print:bg-blue-100 print:text-blue-800'
+                          : skill.proficiency === 'advanced'
+                          ? 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 print:bg-gray-100 print:text-gray-700'
+                          : 'bg-gray-50 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400 print:bg-gray-50 print:text-gray-500'
+                        }`}
+                      >
+                        {skill.name}
+                      </span>
+                    ))
+                  }
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <!-- Languages -->
+        <section>
+          <h2 class="text-xs font-bold tracking-widest uppercase text-blue-600 dark:text-blue-400 mb-3 print:text-blue-700">
+            {t('resume.languages')}
+          </h2>
+          <ul class="space-y-1.5 text-sm text-gray-600 dark:text-gray-300 print:text-gray-700">
+            <li class="flex justify-between">
+              <span>{lang === 'en' ? 'Spanish' : 'Español'}</span>
+              <span class="text-gray-400 dark:text-gray-500 print:text-gray-500">{lang === 'en' ? 'Native' : 'Nativo'}</span>
+            </li>
+            <li class="flex justify-between">
+              <span>{lang === 'en' ? 'English' : 'Inglés'}</span>
+              <span class="text-gray-400 dark:text-gray-500 print:text-gray-500">{lang === 'en' ? 'Professional' : 'Profesional'}</span>
+            </li>
+          </ul>
+        </section>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<style>
+  @media print {
+    @page { margin: 1.5cm; }
+  }
+</style>

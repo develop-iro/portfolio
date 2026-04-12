@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background -->
+  <rect width="32" height="32" rx="7" fill="#0f172a"/>
+
+  <!-- Blue accent bar -->
+  <rect x="8" y="7" width="16" height="2.5" rx="1.25" fill="#2563eb"/>
+
+  <!-- "iro" wordmark -->
+  <text
+    x="16"
+    y="23"
+    font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+    font-size="11.5"
+    font-weight="800"
+    fill="#ffffff"
+    text-anchor="middle"
+    letter-spacing="0.5"
+  >iro</text>
+</svg>

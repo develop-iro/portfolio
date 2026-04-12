@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../shared/ui/Nav.astro';
+import HeroSection from '../../features/hero/HeroSection.astro';
+import AboutSection from '../../features/about/AboutSection.astro';
+import SkillsSection from '../../features/skills/SkillsSection.astro';
+import ProjectsSection from '../../features/projects/ProjectsSection.astro';
+import ExperienceSection from '../../features/experience/ExperienceSection.astro';
+import MetricsSection from '../../features/metrics/MetricsSection.astro';
+import ContactSection from '../../features/contact/ContactSection.astro';
+import { useTranslations } from '../../shared/i18n/translations';
+
+const lang = 'en' as const;
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+  title="iro.dev — Frontend Engineer"
+  description="Personal portfolio of Ivan Romero, Frontend Engineer specialising in Web Components, Ember.js, and modern frontend architecture."
+  lang={lang}
+>
+  <Nav lang={lang} t={t} />
+  <main id="main-content" aria-label="Main content">
+    <HeroSection lang={lang} t={t} />
+    <AboutSection lang={lang} t={t} />
+    <SkillsSection t={t} />
+    <ProjectsSection lang={lang} t={t} />
+    <ExperienceSection lang={lang} t={t} />
+    <MetricsSection lang={lang} t={t} />
+    <ContactSection t={t} />
+  </main>
+</BaseLayout>

@@ -1,0 +1,23 @@
+---
+// Language-detection redirect.
+// No-JS fallback: meta refresh → /en/
+// JS: reads localStorage preference or navigator.language and redirects.
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="refresh" content="0;url=/en/" />
+    <title>Ivan Romero — Frontend Engineer</title>
+    <script is:inline>
+      (function () {
+        var saved = localStorage.getItem('lang');
+        var browser = navigator.language && navigator.language.startsWith('es') ? 'es' : 'en';
+        var lang = saved || browser;
+        window.location.replace('/' + lang + '/');
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>

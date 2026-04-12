@@ -1,0 +1,73 @@
+---
+import Footer from '../shared/ui/Footer.astro';
+import CustomCursor from '../shared/ui/CustomCursor.astro';
+import type { Lang } from '../shared/i18n/translations';
+import { useTranslations } from '../shared/i18n/translations';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang: Lang;
+}
+
+const { title, description = 'Personal portfolio of Ivan Romero, Frontend Engineer.', lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Theme initialization: runs before first paint to avoid flash of wrong theme -->
+    <script is:inline>
+      try {
+        const stored = localStorage.getItem('theme');
+        if (stored === 'dark' || stored === 'light') {
+          document.documentElement.classList.toggle('dark', stored === 'dark');
+        } else {
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.classList.toggle('dark', prefersDark);
+        }
+      } catch (_) {}
+    </script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans transition-colors duration-300">
+    <!-- Scroll progress bar -->
+    <div
+      id="scroll-progress"
+      aria-hidden="true"
+      style="position:fixed;top:0;left:0;z-index:60;height:3px;width:0%;pointer-events:none;background:linear-gradient(to right,#2563eb,#60a5fa);transition:width 80ms linear"
+    ></div>
+
+    <CustomCursor />
+    <slot />
+    <Footer lang={lang} t={t} />
+
+    <script is:inline>
+      (function () {
+        const bar = document.getElementById('scroll-progress');
+        if (!bar) return;
+        function update() {
+          const scrolled = window.scrollY;
+          const total = document.documentElement.scrollHeight - window.innerHeight;
+          bar.style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
+        }
+        window.addEventListener('scroll', update, { passive: true });
+        update();
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+---
+import { projects } from './data';
+import ProjectFilter from './ProjectFilter';
+import type { Lang, UIKey } from '../../shared/i18n/translations';
+
+interface Props { lang: Lang; t: (key: UIKey) => string }
+const { lang, t } = Astro.props;
+
+const categories = [...new Set(projects.flatMap((p) => p.categories))];
+---
+
+<section id="projects" class="py-20 px-4 bg-gray-50 dark:bg-gray-800/50">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-3">{t('projects.heading')}</h2>
+    <div class="w-12 h-1 bg-blue-600 rounded mb-4" aria-hidden="true"></div>
+    <p class="text-gray-500 dark:text-gray-400 mb-10">{t('projects.subtitle')}</p>
+    <ProjectFilter
+      projects={projects}
+      categories={categories}
+      lang={lang}
+      liveDemo={t('projects.liveDemo')}
+      repository={t('projects.repo')}
+      client:load
+    />
+  </div>
+</section>

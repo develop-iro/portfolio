@@ -81,9 +81,9 @@ export default function ContactForm({
 
   if (status === 'success') {
     return (
-      <div className="p-6 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl text-center">
-        <p className="text-green-700 dark:text-green-400 font-medium">
-          Message sent! I'll get back to you soon.
+      <div className="rounded-xl border border-green-200 bg-green-50 p-6 text-center dark:border-green-800 dark:bg-green-900/20">
+        <p className="font-medium text-green-700 dark:text-green-400">
+          Message sent! I&apos;ll get back to you soon.
         </p>
       </div>
     );
@@ -92,13 +92,16 @@ export default function ContactForm({
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-5">
       {status === 'error' && (
-        <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-sm text-red-700 dark:text-red-400">
+        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-800 dark:bg-red-900/20 dark:text-red-400">
           Something went wrong. Please try again.
         </div>
       )}
 
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="name"
+          className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300"
+        >
           Name
         </label>
         <input
@@ -120,7 +123,10 @@ export default function ContactForm({
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="email"
+          className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300"
+        >
           Email
         </label>
         <input
@@ -142,7 +148,10 @@ export default function ContactForm({
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="message"
+          className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300"
+        >
           Message
         </label>
         <textarea
@@ -165,7 +174,7 @@ export default function ContactForm({
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-blue-500"
+        className="w-full rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition-colors hover:bg-blue-700 focus-visible:ring-2 focus-visible:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === 'submitting' ? 'Sending…' : 'Send Message'}
       </button>

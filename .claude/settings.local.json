@@ -7,7 +7,8 @@
       "Bash(curl -s https://api.github.com/users/develop-iro)",
       "Bash(curl -s https://api.github.com/users/develop-iro/repos)",
       "Bash(gh api:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(npm install:*)"
     ]
   }
 }

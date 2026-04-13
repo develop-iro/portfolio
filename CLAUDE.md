@@ -13,6 +13,7 @@ npm run test:ui    # Interactive Vitest UI
 ```
 
 To run a single test file:
+
 ```bash
 npx vitest run src/test/SomeComponent.test.tsx
 ```
@@ -20,6 +21,7 @@ npx vitest run src/test/SomeComponent.test.tsx
 ## Environment Setup
 
 Copy `.env.example` to `.env` and fill in EmailJS credentials for the contact form to work:
+
 - `PUBLIC_EMAILJS_SERVICE_ID`
 - `PUBLIC_EMAILJS_TEMPLATE_ID`
 - `PUBLIC_EMAILJS_PUBLIC_KEY`
@@ -55,6 +57,7 @@ src/
 ```
 
 **Key rules:**
+
 - Features import from `../../shared/` but never from other features directly (except `metrics/data.ts` which reads `experience` and `skills` data to compute KPIs).
 - `shared/` contains no business logic — only generic UI primitives and i18n.
 - Data lives co-located with its feature (`features/*/data.ts`). To add content, edit the relevant `data.ts`.

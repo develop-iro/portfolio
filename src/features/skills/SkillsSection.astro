@@ -2,67 +2,99 @@
 import { skills } from './data';
 import type { UIKey } from '../../shared/i18n/translations';
 
-interface Props { t: (key: UIKey) => string }
+interface Props {
+  t: (key: UIKey) => string;
+}
 const { t } = Astro.props;
 
 const iconMap: Record<string, string> = {
-  'JavaScript (ES6+)':    'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
-  'TypeScript':           'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
-  'React':                'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+  'JavaScript (ES6+)':
+    'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
+  TypeScript:
+    'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+  React: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
   'Web Components (Lit)': 'https://cdn.simpleicons.org/lit/325FFF',
-  'Ember.js':             'https://cdn.simpleicons.org/emberdotjs/E04E39',
-  'HTML5':                'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
-  'SCSS':                 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg',
-  'Tailwind CSS':         'https://cdn.simpleicons.org/tailwindcss/06B6D4',
-  'Vite':                 'https://cdn.simpleicons.org/vite/646CFF',
-  'Storybook':            'https://cdn.simpleicons.org/storybook/FF4785',
-  'Git':                  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
-  'ESLint':               'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/eslint/eslint-original.svg',
-  'Node.js':              'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
-  'GitHub Copilot':       'https://cdn.simpleicons.org/githubcopilot/6E40C9',
-  'Cursor':               'https://cdn.simpleicons.org/cursor/000000',
-  'Claude':               'https://cdn.simpleicons.org/claude/D97757',
+  'Ember.js': 'https://cdn.simpleicons.org/emberdotjs/E04E39',
+  HTML5: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
+  SCSS: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg',
+  'Tailwind CSS': 'https://cdn.simpleicons.org/tailwindcss/06B6D4',
+  Vite: 'https://cdn.simpleicons.org/vite/646CFF',
+  Storybook: 'https://cdn.simpleicons.org/storybook/FF4785',
+  Git: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
+  ESLint: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/eslint/eslint-original.svg',
+  'Node.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+  'GitHub Copilot': 'https://cdn.simpleicons.org/githubcopilot/6E40C9',
+  Cursor: 'https://cdn.simpleicons.org/cursor/000000',
+  Claude: 'https://cdn.simpleicons.org/claude/D97757',
 };
 
-const carouselSkills = skills.filter(s => iconMap[s.name]);
+const carouselSkills = skills.filter((s) => iconMap[s.name]);
 const track = [...carouselSkills, ...carouselSkills];
 ---
 
-<section id="skills" class="py-20 overflow-hidden bg-gray-50 dark:bg-gray-800/50">
-  <div class="max-w-6xl mx-auto px-4">
-    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-3 text-center">{t('skills.heading')}</h2>
-    <div class="w-12 h-1 bg-blue-600 rounded mx-auto mb-4" aria-hidden="true"></div>
-    <p class="text-center text-gray-500 dark:text-gray-400 mb-12">{t('skills.subtitle')}</p>
+<section id="skills" class="overflow-hidden bg-gray-50 py-20 dark:bg-gray-800/50">
+  <div class="mx-auto max-w-6xl px-4">
+    <h2 class="mb-3 text-center text-3xl font-bold text-gray-900 dark:text-white">
+      {t('skills.heading')}
+    </h2>
+    <div class="mx-auto mb-4 h-1 w-12 rounded bg-blue-600" aria-hidden="true"></div>
+    <p class="mb-12 text-center text-gray-500 dark:text-gray-400">{t('skills.subtitle')}</p>
   </div>
 
   <div class="relative" aria-hidden="true">
-    <div class="absolute left-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-r from-gray-50 dark:from-gray-900 to-transparent pointer-events-none"></div>
-    <div class="absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-gray-50 dark:from-gray-900 to-transparent pointer-events-none"></div>
+    <div
+      class="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-24 bg-gradient-to-r from-gray-50 to-transparent dark:from-gray-900"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-24 bg-gradient-to-l from-gray-50 to-transparent dark:from-gray-900"
+    >
+    </div>
 
-    <div class="flex gap-6 carousel-track">
-      {track.map((skill) => (
-        <div class="flex-shrink-0 flex flex-col items-center gap-3 px-6 py-5 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 w-28 hover:border-blue-400 dark:hover:border-blue-500 transition-colors">
-          <img
-            src={iconMap[skill.name]}
-            alt={skill.name}
-            width="40"
-            height="40"
-            loading="lazy"
-            class="dark:brightness-90"
-            onerror="this.style.display='none'"
-          />
-          <span class="text-xs font-medium text-gray-700 dark:text-gray-300 text-center leading-tight">{skill.name}</span>
-        </div>
-      ))}
+    <div class="carousel-track flex gap-6">
+      {
+        track.map((skill) => (
+          <div class="flex w-28 flex-shrink-0 flex-col items-center gap-3 rounded-xl border border-gray-200 bg-white px-6 py-5 transition-colors hover:border-blue-400 dark:border-gray-700 dark:bg-gray-800 dark:hover:border-blue-500">
+            <img
+              src={iconMap[skill.name]}
+              alt={skill.name}
+              width="40"
+              height="40"
+              loading="lazy"
+              class="dark:brightness-90"
+              onerror="this.style.display='none'"
+            />
+            <span class="text-center text-xs font-medium leading-tight text-gray-700 dark:text-gray-300">
+              {skill.name}
+            </span>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>
 
 <style>
-  .carousel-track { animation: scroll 30s linear infinite; width: max-content; }
-  .carousel-track:hover { animation-play-state: paused; }
-  @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .carousel-track {
+    animation: scroll 30s linear infinite;
+    width: max-content;
+  }
+  .carousel-track:hover {
+    animation-play-state: paused;
+  }
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
   @media (prefers-reduced-motion: reduce) {
-    .carousel-track { animation: none; flex-wrap: wrap; justify-content: center; }
+    .carousel-track {
+      animation: none;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
   }
 </style>

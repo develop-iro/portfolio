@@ -1,4 +1,5 @@
 ---
+
 ---
 
 <!-- Only rendered visually on devices with a precise pointer (mouse) -->
@@ -8,7 +9,9 @@
 <!-- Hide native cursor site-wide on pointer devices -->
 <style is:global>
   @media (hover: hover) and (pointer: fine) {
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       cursor: none !important;
     }
   }
@@ -31,14 +34,19 @@
     width: 8px;
     height: 8px;
     background: #3b82f6;
-    transition: opacity 0.2s ease, background-color 0.15s ease, transform 0.08s linear;
+    transition:
+      opacity 0.2s ease,
+      background-color 0.15s ease,
+      transform 0.08s linear;
   }
 
   #c-ring {
     width: 36px;
     height: 36px;
     border: 2px solid rgba(59, 130, 246, 0.55);
-    transition: opacity 0.2s ease, border-color 0.2s ease;
+    transition:
+      opacity 0.2s ease,
+      border-color 0.2s ease;
   }
 
   /* Don't show on touch/coarse devices */
@@ -54,35 +62,45 @@
   (function () {
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
-    var dot = document.getElementById('c-dot');
-    var ring = document.getElementById('c-ring');
+    const dot = document.getElementById('c-dot');
+    const ring = document.getElementById('c-ring');
     if (!dot || !ring) return;
 
-    var HALF_DOT = 4;
-    var HALF_RING = 18;
-    var LERP_POS = 0.12;
-    var LERP_SCALE = 0.14;
+    const HALF_DOT = 4;
+    const HALF_RING = 18;
+    const LERP_POS = 0.12;
+    const LERP_SCALE = 0.14;
 
-    var mx = 0, my = 0;
-    var rx = 0, ry = 0;
-    var ringScale = 1, targetScale = 1;
-    var visible = false;
+    let mx = 0,
+      my = 0;
+    let rx = 0,
+      ry = 0;
+    let ringScale = 1,
+      targetScale = 1;
+    let visible = false;
 
-    function lerp(a, b, t) { return a + (b - a) * t; }
+    function lerp(a, b, t) {
+      return a + (b - a) * t;
+    }
 
-    document.addEventListener('mousemove', function (e) {
-      mx = e.clientX;
-      my = e.clientY;
+    document.addEventListener(
+      'mousemove',
+      function (e) {
+        mx = e.clientX;
+        my = e.clientY;
 
-      if (!visible) {
-        visible = true;
-        rx = mx; ry = my;
-        dot.style.opacity = '1';
-        ring.style.opacity = '1';
-      }
+        if (!visible) {
+          visible = true;
+          rx = mx;
+          ry = my;
+          dot.style.opacity = '1';
+          ring.style.opacity = '1';
+        }
 
-      dot.style.transform = 'translate(' + (mx - HALF_DOT) + 'px,' + (my - HALF_DOT) + 'px)';
-    }, { passive: true });
+        dot.style.transform = 'translate(' + (mx - HALF_DOT) + 'px,' + (my - HALF_DOT) + 'px)';
+      },
+      { passive: true }
+    );
 
     document.addEventListener('mouseleave', function () {
       dot.style.opacity = '0';
@@ -92,7 +110,7 @@
 
     // Expand ring over clickable elements
     document.addEventListener('mouseover', function (e) {
-      var el = e.target;
+      const el = e.target;
       if (el && el.closest && el.closest('a,button,[role="button"],input,textarea,select,label')) {
         targetScale = 1.65;
         ring.style.borderColor = 'rgba(59,130,246,0.9)';

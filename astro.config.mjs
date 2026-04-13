@@ -4,8 +4,5 @@ import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
   output: 'static',
-  integrations: [
-    react(),
-    tailwind(),
-  ],
+  integrations: [react(), tailwind()],
 });

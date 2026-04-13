@@ -12,33 +12,6 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: 'bbva-web-components-library',
-    title: 'BBVA Web Components Library',
-    description: {
-      en: 'Core UI component library built with Lit (Web Components) as part of the migration from Ember.js to a framework-agnostic architecture powering a hybrid banking app with 100+ features.',
-      es: 'Biblioteca de componentes de interfaz principal construida con Lit (Web Components) como parte de la migración de Ember.js a una arquitectura agnóstica de framework que impulsa una app bancaria híbrida con más de 100 funcionalidades.',
-    },
-    longDescription:
-      "Led the architecture and development of a large-scale Web Components library using Lit, enabling a seamless migration from Ember.js. The library serves millions of users across BBVA's digital banking platform, with a focus on performance, accessibility, and design-system consistency. Includes comprehensive Storybook documentation and QUnit/Sinon test coverage.",
-    thumbnail: '/images/projects/bbva-web-components.svg',
-    techStack: ['Web Components', 'Lit', 'TypeScript', 'Storybook', 'QUnit', 'Sinon', 'SCSS'],
-    categories: ['Frontend Architecture', 'Web Components'],
-    repoUrl: undefined,
-  },
-  {
-    slug: 'ember-octane-migration',
-    title: 'Ember Classic → Octane Migration',
-    description: {
-      en: 'Progressive migration of a production PWA from Ember Classic to Ember Octane, adopting Glimmer components, tracked properties, and native classes to modernise the codebase.',
-      es: 'Migración progresiva de una PWA en producción de Ember Classic a Ember Octane, adoptando componentes Glimmer, propiedades tracked y clases nativas para modernizar el código base.',
-    },
-    longDescription:
-      'Planned and executed a phased migration of a large Ember.js PWA from the Classic programming model to Ember Octane at Minsait. The migration introduced Glimmer components, @tracked state, and native ES classes, significantly reducing boilerplate and improving rendering performance. Included updating the test suite from QUnit classic patterns to modern Ember testing conventions.',
-    thumbnail: '/images/projects/ember-octane.svg',
-    techStack: ['Ember.js', 'Glimmer', 'TypeScript', 'JavaScript', 'QUnit', 'Cucumber', 'WebDriver'],
-    categories: ['Frontend Architecture', 'PWA'],
-  },
-  {
     slug: 'lexis-website',
     title: 'Lexis — Accounting Firm Website',
     description: {
@@ -62,7 +35,15 @@ export const projects: Project[] = [
     longDescription:
       'A GIF search application built with React 19 and TypeScript that integrates with an external GIFs API via Axios. Features full internationalisation (EN/ES) with i18next, previous-search history, custom hooks for data fetching and state management, and a test suite covering SearchInput, Header and PreviousSearches components with Vitest and React Testing Library.',
     thumbnail: '/images/projects/gifs-app.svg',
-    techStack: ['React', 'TypeScript', 'Axios', 'i18next', 'Vitest', 'React Testing Library', 'Vite'],
+    techStack: [
+      'React',
+      'TypeScript',
+      'Axios',
+      'i18next',
+      'Vitest',
+      'React Testing Library',
+      'Vite',
+    ],
     categories: ['Web', 'Open Source'],
     repoUrl: 'https://github.com/develop-iro/ReactReview/tree/main/01-gifs-app',
   },

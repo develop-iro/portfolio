@@ -12,7 +12,11 @@ interface Props {
   lang: Lang;
 }
 
-const { title, description = 'Personal portfolio of Ivan Romero, Frontend Engineer.', lang } = Astro.props;
+const {
+  title,
+  description = 'Personal portfolio of Ivan Romero, Frontend Engineer.',
+  lang,
+} = Astro.props;
 const t = useTranslations(lang);
 ---
 
@@ -35,7 +39,9 @@ const t = useTranslations(lang);
           const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
           document.documentElement.classList.toggle('dark', prefersDark);
         }
-      } catch (_) {}
+      } catch {
+        /* ignore — localStorage may be unavailable */
+      }
     </script>
 
     <!-- Google Fonts: Inter -->
@@ -46,13 +52,16 @@ const t = useTranslations(lang);
       rel="stylesheet"
     />
   </head>
-  <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans transition-colors duration-300">
+  <body
+    class="bg-white font-sans text-gray-900 transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100"
+  >
     <!-- Scroll progress bar -->
     <div
       id="scroll-progress"
       aria-hidden="true"
       style="position:fixed;top:0;left:0;z-index:60;height:3px;width:0%;pointer-events:none;background:linear-gradient(to right,#2563eb,#60a5fa);transition:width 80ms linear"
-    ></div>
+    >
+    </div>
 
     <CustomCursor />
     <slot />

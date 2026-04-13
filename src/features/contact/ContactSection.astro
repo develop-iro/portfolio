@@ -2,12 +2,14 @@
 import ContactModal from './ContactModal';
 import type { UIKey } from '../../shared/i18n/translations';
 
-interface Props { t: (key: UIKey) => string }
+interface Props {
+  t: (key: UIKey) => string;
+}
 const { t } = Astro.props;
 
-const serviceId  = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID  ?? '';
+const serviceId = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID ?? '';
 const templateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID ?? '';
-const publicKey  = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY  ?? '';
+const publicKey = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY ?? '';
 ---
 
 <ContactModal
@@ -15,22 +17,22 @@ const publicKey  = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY  ?? '';
   emailjsTemplateId={templateId}
   emailjsPublicKey={publicKey}
   strings={{
-    btn:            t('contact.btn'),
-    title:          t('contact.title'),
-    subtitle:       t('contact.subtitle'),
-    name:           t('contact.name'),
-    email:          t('contact.email'),
-    message:        t('contact.message'),
-    send:           t('contact.send'),
-    sending:        t('contact.sending'),
-    success:        t('contact.success'),
-    close:          t('contact.close'),
-    openLabel:      t('contact.openLabel'),
-    errName:        t('contact.err.name'),
-    errEmail:       t('contact.err.email'),
-    errEmailInvalid:t('contact.err.emailInvalid'),
-    errMessage:     t('contact.err.message'),
-    errGeneric:     t('contact.err.generic'),
+    btn: t('contact.btn'),
+    title: t('contact.title'),
+    subtitle: t('contact.subtitle'),
+    name: t('contact.name'),
+    email: t('contact.email'),
+    message: t('contact.message'),
+    send: t('contact.send'),
+    sending: t('contact.sending'),
+    success: t('contact.success'),
+    close: t('contact.close'),
+    openLabel: t('contact.openLabel'),
+    errName: t('contact.err.name'),
+    errEmail: t('contact.err.email'),
+    errEmailInvalid: t('contact.err.emailInvalid'),
+    errMessage: t('contact.err.message'),
+    errGeneric: t('contact.err.generic'),
   }}
   client:load
 />

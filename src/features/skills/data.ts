@@ -18,7 +18,11 @@ export const skills: Skill[] = [
 
   // AI & Emerging Technologies
   { name: 'LLMs', category: 'AI & Emerging Technologies', proficiency: 'intermediate' },
-  { name: 'Prompt Engineering', category: 'AI & Emerging Technologies', proficiency: 'intermediate' },
+  {
+    name: 'Prompt Engineering',
+    category: 'AI & Emerging Technologies',
+    proficiency: 'intermediate',
+  },
   { name: 'AI Agents', category: 'AI & Emerging Technologies', proficiency: 'intermediate' },
   { name: 'GitHub Copilot', category: 'AI & Emerging Technologies', proficiency: 'advanced' },
   { name: 'Cursor', category: 'AI & Emerging Technologies', proficiency: 'advanced' },
@@ -26,7 +30,11 @@ export const skills: Skill[] = [
   { name: 'Claude', category: 'AI & Emerging Technologies', proficiency: 'intermediate' },
 
   // Architecture & Patterns
-  { name: 'Component-based Architecture', category: 'Architecture & Patterns', proficiency: 'advanced' },
+  {
+    name: 'Component-based Architecture',
+    category: 'Architecture & Patterns',
+    proficiency: 'advanced',
+  },
   { name: 'Design Patterns', category: 'Architecture & Patterns', proficiency: 'advanced' },
   { name: 'State Management', category: 'Architecture & Patterns', proficiency: 'advanced' },
   { name: 'OOP', category: 'Architecture & Patterns', proficiency: 'advanced' },

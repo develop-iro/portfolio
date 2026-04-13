@@ -1,7 +1,10 @@
 ---
 import type { UIKey } from '../i18n/translations';
 import BugSquasher from '../../features/bug-squasher/BugSquasher.tsx';
-interface Props { t: (key: UIKey) => string; lang: string }
+interface Props {
+  t: (key: UIKey) => string;
+  lang: string;
+}
 const { t } = Astro.props;
 const year = new Date().getFullYear();
 ---
@@ -9,25 +12,27 @@ const year = new Date().getFullYear();
 <footer>
   <BugSquasher client:visible />
 
-  <div class="py-6 px-4 border-t border-gray-200 dark:border-gray-700">
-  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500 dark:text-gray-400">
-    <p>© {year} Ivan Romero. {t('footer.rights')}</p>
-    <div class="flex gap-4">
-      <a
-        href="https://github.com/develop-iro"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="hover:text-gray-900 dark:hover:text-white transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
-        aria-label="GitHub profile"
-      >GitHub</a>
-      <a
-        href="https://www.linkedin.com/in/ivan-ccamilo/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="hover:text-gray-900 dark:hover:text-white transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
-        aria-label="LinkedIn profile"
-      >LinkedIn</a>
+  <div class="border-t border-gray-200 px-4 py-6 dark:border-gray-700">
+    <div
+      class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-sm text-gray-500 dark:text-gray-400 sm:flex-row"
+    >
+      <p>© {year} Ivan Romero. {t('footer.rights')}</p>
+      <div class="flex gap-4">
+        <a
+          href="https://github.com/develop-iro"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rounded transition-colors hover:text-gray-900 focus-visible:ring-2 focus-visible:ring-blue-500 dark:hover:text-white"
+          aria-label="GitHub profile">GitHub</a
+        >
+        <a
+          href="https://www.linkedin.com/in/ivan-ccamilo/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rounded transition-colors hover:text-gray-900 focus-visible:ring-2 focus-visible:ring-blue-500 dark:hover:text-white"
+          aria-label="LinkedIn profile">LinkedIn</a
+        >
+      </div>
     </div>
-  </div>
   </div>
 </footer>

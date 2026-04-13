@@ -6,7 +6,6 @@ import AboutSection from '../../features/about/AboutSection.astro';
 import SkillsSection from '../../features/skills/SkillsSection.astro';
 import ProjectsSection from '../../features/projects/ProjectsSection.astro';
 import ExperienceSection from '../../features/experience/ExperienceSection.astro';
-import MetricsSection from '../../features/metrics/MetricsSection.astro';
 import ContactSection from '../../features/contact/ContactSection.astro';
 import { useTranslations } from '../../shared/i18n/translations';
 
@@ -26,7 +25,6 @@ const t = useTranslations(lang);
     <SkillsSection t={t} />
     <ProjectsSection lang={lang} t={t} />
     <ExperienceSection lang={lang} t={t} />
-    <MetricsSection lang={lang} t={t} />
     <ContactSection t={t} />
   </main>
 </BaseLayout>

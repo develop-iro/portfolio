@@ -33,7 +33,8 @@ export default function CountUp({ to, suffix = '', duration = 1400 }: Props) {
 
   return (
     <span className="tabular-nums">
-      {value}{suffix}
+      {value}
+      {suffix}
     </span>
   );
 }

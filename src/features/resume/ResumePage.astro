@@ -48,15 +48,16 @@ const proficiencyOrder = { expert: 0, advanced: 1, intermediate: 2, beginner: 3 
   <div
     class="sticky top-0 z-40 border-b border-gray-200 bg-white/90 backdrop-blur dark:border-gray-700 dark:bg-gray-900/90 print:hidden"
   >
-    <div class="mx-auto flex h-14 max-w-4xl items-center justify-between gap-4 px-4">
+    <div class="mx-auto flex h-14 max-w-4xl items-center justify-between gap-2 px-4">
       <a
         href={`/${lang}/`}
         class="shrink-0 text-sm font-medium text-blue-600 hover:underline dark:text-blue-400"
       >
-        {t('resume.back')}
+        <span class="hidden sm:inline">{t('resume.back')}</span>
+        <span class="sm:hidden">← {lang === 'en' ? 'Back' : 'Volver'}</span>
       </a>
 
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2">
         <!-- Language toggle -->
         <a
           href={`/${otherLang}/resume`}
@@ -66,48 +67,29 @@ const proficiencyOrder = { expert: 0, advanced: 1, intermediate: 2, beginner: 3 
           {otherLangLabel}
         </a>
 
+        <!-- Print: icon-only on mobile -->
         <button
           onclick="window.print()"
           class="flex items-center gap-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+          aria-label={t('resume.print')}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-4 w-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
-            ></path>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
           </svg>
-          {t('resume.print')}
+          <span class="hidden sm:inline">{t('resume.print')}</span>
         </button>
 
+        <!-- Download: short label on mobile -->
         <a
           href="/resume.pdf"
           download
-          class="flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-medium text-white transition-colors hover:bg-blue-500"
+          class="flex items-center gap-1.5 rounded-lg bg-blue-600 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-blue-500 sm:px-4"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-4 w-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"></path>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"></path>
           </svg>
-          {t('resume.download')}
+          <span class="hidden sm:inline">{t('resume.download')}</span>
+          <span class="sm:hidden">PDF</span>
         </a>
       </div>
     </div>
@@ -172,8 +154,8 @@ const proficiencyOrder = { expert: 0, advanced: 1, intermediate: 2, beginner: 3 
           <p class="text-sm leading-relaxed text-gray-600 dark:text-gray-300 print:text-gray-700">
             {
               lang === 'en'
-                ? 'Frontend Engineer with 3+ years at BBVA Technology, contributing to the team-wide migration of a large-scale banking app from Ember.js to Web Components (Lit). Our team leveraged AI tools and models (GitHub Copilot, Cursor, Codex) to automate component migration and repetitive tasks. Active in performance optimisation and mentoring. Looking to grow towards fullstack development. Fluent in Spanish and English.'
-                : 'Ingeniero Frontend con más de 3 años en BBVA Technology, contribuyendo junto al equipo a la migración de una aplicación bancaria de gran escala de Ember.js a Web Components (Lit). El equipo utilizó herramientas y modelos de IA (GitHub Copilot, Cursor, Codex) para automatizar la migración de componentes y tareas repetitivas. Activo en optimización del rendimiento y mentoría. Interés en crecer hacia el desarrollo fullstack.'
+                ? 'Frontend Engineer with 3+ years of production experience building and migrating large-scale web applications. I leverage AI tools (Copilot, Cursor, Codex) to automate repetitive work and ship faster. Active in performance optimisation and code quality. Looking for new challenges at the intersection of frontend and AI automation. Fluent in Spanish and English.'
+                : 'Ingeniero Frontend con más de 3 años de experiencia en producción construyendo y migrando aplicaciones web a gran escala. Utilizo herramientas de IA (Copilot, Cursor, Codex) para automatizar tareas repetitivas y entregar más rápido. Activo en optimización del rendimiento y calidad del código. Buscando nuevos retos en la intersección del frontend y la automatización con IA.'
             }
           </p>
         </section>

@@ -57,9 +57,9 @@ cp .env.example .env
 Fill in your [EmailJS](https://emailjs.com) credentials:
 
 ```
-PUBLIC_EMAILJS_SERVICE_ID=your_service_id
-PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id
-PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key
+PRIVATE_EMAILJS_SERVICE_ID=your_service_id
+PRIVATE_EMAILJS_TEMPLATE_ID=your_template_id
+PRIVATE_EMAILJS_PUBLIC_KEY=your_public_key
 ```
 
 These are `PUBLIC_*` Astro variables — intentionally exposed to the browser (EmailJS is designed for client-side use).

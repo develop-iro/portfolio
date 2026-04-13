@@ -99,62 +99,78 @@ function formatDate(dateStr: string): string {
 </section>
 
 <style>
-  .timeline-entry {
-    opacity: 0;
-    transform: translateY(32px);
-    transition:
-      opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) var(--delay, 0ms),
-      transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) var(--delay, 0ms);
-  }
-  .timeline-entry.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .timeline-dot {
-    transform: scale(0);
-    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  .timeline-dot.is-visible {
-    transform: scale(1);
+  @media (prefers-reduced-motion: no-preference) {
+    .timeline-entry {
+      opacity: 0;
+      transform: translateY(32px);
+      transition:
+        opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) var(--delay, 0ms),
+        transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) var(--delay, 0ms);
+    }
+    .timeline-entry.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .timeline-dot {
+      transform: scale(0);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .timeline-dot.is-visible {
+      transform: scale(1);
+    }
   }
 </style>
 
 <script>
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   // Animate timeline fill line
   const line = document.getElementById('timeline-line');
   const lineTrack = line?.parentElement?.querySelector<HTMLElement>(
     '.absolute.left-4.top-0.bottom-0'
   );
   if (line && lineTrack) {
-    const lineObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          line.style.height = lineTrack.offsetHeight + 'px';
-          lineObserver.disconnect();
-        }
-      },
-      { threshold: 0.05 }
-    );
-    lineObserver.observe(lineTrack);
+    if (reducedMotion) {
+      line.style.height = lineTrack.offsetHeight + 'px';
+    } else {
+      const lineObserver = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            line.style.height = lineTrack.offsetHeight + 'px';
+            lineObserver.disconnect();
+          }
+        },
+        { threshold: 0.05 }
+      );
+      lineObserver.observe(lineTrack);
+    }
   }
 
   const entries = document.querySelectorAll<HTMLElement>('.timeline-entry');
-  const observer = new IntersectionObserver(
-    (observations) => {
-      observations.forEach((obs) => {
-        if (obs.isIntersecting) {
-          const el = obs.target as HTMLElement;
-          el.classList.add('is-visible');
-          const dot = el.querySelector<HTMLElement>('.timeline-dot');
-          if (dot) {
-            const delay = parseFloat(getComputedStyle(el).getPropertyValue('--delay')) || 0;
-            setTimeout(() => dot.classList.add('is-visible'), delay + 300);
+
+  if (reducedMotion) {
+    entries.forEach((el) => {
+      el.classList.add('is-visible');
+      el.querySelector<HTMLElement>('.timeline-dot')?.classList.add('is-visible');
+    });
+  } else {
+    const observer = new IntersectionObserver(
+      (observations) => {
+        observations.forEach((obs) => {
+          if (obs.isIntersecting) {
+            const el = obs.target as HTMLElement;
+            el.classList.add('is-visible');
+            const dot = el.querySelector<HTMLElement>('.timeline-dot');
+            if (dot) {
+              const delay = parseFloat(getComputedStyle(el).getPropertyValue('--delay')) || 0;
+              setTimeout(() => dot.classList.add('is-visible'), delay + 300);
+            }
+            observer.unobserve(el);
           }
-          observer.unobserve(el);
-        }
-      });
-    },
-    { threshold: 0.1 }
-  );
-  entries.forEach((el) => observer.observe(el));
+        });
+      },
+      { threshold: 0.1 }
+    );
+    entries.forEach((el) => observer.observe(el));
+  }
 </script>

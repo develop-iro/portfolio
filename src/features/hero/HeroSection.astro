@@ -65,7 +65,7 @@ const { t, lang } = Astro.props;
       </a>
     </div>
 
-    <div class="mt-16 flex animate-bounce items-center gap-2 text-sm text-gray-400">
+    <div class="mt-16 flex motion-safe:animate-bounce items-center gap-2 text-sm text-gray-400">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="h-4 w-4"
@@ -86,7 +86,7 @@ const { t, lang } = Astro.props;
 
 <script>
   const img = document.getElementById('hero-img') as HTMLElement | null;
-  if (img) {
+  if (img && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     let ticking = false;
     window.addEventListener(
       'scroll',

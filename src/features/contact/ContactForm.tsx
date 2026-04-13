@@ -109,6 +109,7 @@ export default function ContactForm({
           name="name"
           type="text"
           autoComplete="name"
+          required
           value={fields.name}
           onChange={handleChange}
           aria-describedby={errors.name ? 'name-error' : undefined}
@@ -134,6 +135,7 @@ export default function ContactForm({
           name="email"
           type="email"
           autoComplete="email"
+          required
           value={fields.email}
           onChange={handleChange}
           aria-describedby={errors.email ? 'email-error' : undefined}
@@ -158,6 +160,7 @@ export default function ContactForm({
           id="message"
           name="message"
           rows={5}
+          required
           value={fields.message}
           onChange={handleChange}
           aria-describedby={errors.message ? 'message-error' : undefined}

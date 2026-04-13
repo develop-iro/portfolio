@@ -6,18 +6,41 @@ import SpeedInsights from '@vercel/speed-insights/astro';
 import type { Lang } from '../shared/i18n/translations';
 import { useTranslations } from '../shared/i18n/translations';
 
+interface Alternate {
+  hreflang: string;
+  href: string;
+}
+
 interface Props {
   title: string;
   description?: string;
   lang: Lang;
+  ogImage?: string;
+  alternates?: Alternate[];
 }
 
 const {
   title,
   description = 'Personal portfolio of Ivan Romero, Frontend Engineer.',
   lang,
+  ogImage,
+  alternates,
 } = Astro.props;
 const t = useTranslations(lang);
+
+const canonicalUrl = Astro.url.href;
+const resolvedOgImage = ogImage
+  ? new URL(ogImage, Astro.site).href
+  : new URL('/images/profile.jpeg', Astro.site).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Ivan Romero',
+  jobTitle: lang === 'es' ? 'Ingeniero Frontend' : 'Frontend Engineer',
+  url: Astro.site?.href ?? 'https://ivan-romero.dev',
+  sameAs: ['https://github.com/develop-iro', 'https://www.linkedin.com/in/ivan-ccamilo/'],
+};
 ---
 
 <!doctype html>
@@ -27,7 +50,28 @@ const t = useTranslations(lang);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <title>{title}</title>
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={resolvedOgImage} />
+    <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={resolvedOgImage} />
+
+    <!-- hreflang alternates -->
+    {alternates?.map((alt) => <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />)}
+
+    <!-- JSON-LD structured data -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
     <!-- Theme initialization: runs before first paint to avoid flash of wrong theme -->
     <script is:inline>
@@ -62,6 +106,14 @@ const t = useTranslations(lang);
       style="position:fixed;top:0;left:0;z-index:60;height:3px;width:0%;pointer-events:none;background:linear-gradient(to right,#2563eb,#60a5fa);transition:width 80ms linear"
     >
     </div>
+
+    <!-- Skip-to-content link (visible on focus for keyboard users) -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-blue-600 focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white focus:outline-none"
+    >
+      {lang === 'es' ? 'Ir al contenido principal' : 'Skip to main content'}
+    </a>
 
     <CustomCursor />
     <slot />

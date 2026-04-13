@@ -249,6 +249,7 @@ export default function ContactModal({
                     name="name"
                     type="text"
                     autoComplete="name"
+                    required
                     value={fields.name}
                     onChange={handleChange}
                     aria-invalid={!!errors.name}
@@ -273,6 +274,7 @@ export default function ContactModal({
                     name="email"
                     type="email"
                     autoComplete="email"
+                    required
                     value={fields.email}
                     onChange={handleChange}
                     aria-invalid={!!errors.email}
@@ -296,6 +298,7 @@ export default function ContactModal({
                     id="modal-message"
                     name="message"
                     rows={4}
+                    required
                     value={fields.message}
                     onChange={handleChange}
                     aria-invalid={!!errors.message}

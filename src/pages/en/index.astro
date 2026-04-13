@@ -17,6 +17,11 @@ const t = useTranslations(lang);
   title="iro.dev — Frontend Engineer"
   description="Personal portfolio of Ivan Romero, Frontend Engineer specialising in Web Components, Ember.js, and modern frontend architecture."
   lang={lang}
+  alternates={[
+    { hreflang: 'en', href: 'https://ivan-romero.dev/en/' },
+    { hreflang: 'es', href: 'https://ivan-romero.dev/es/' },
+    { hreflang: 'x-default', href: 'https://ivan-romero.dev/en/' },
+  ]}
 >
   <Nav lang={lang} t={t} />
   <main id="main-content" aria-label="Main content">

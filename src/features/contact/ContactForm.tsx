@@ -64,7 +64,7 @@ export default function ContactForm({
       await emailjs.send(
         emailjsServiceId,
         emailjsTemplateId,
-        { from_name: fields.name, from_email: fields.email, message: fields.message },
+        { name: fields.name, email: fields.email, message: fields.message },
         emailjsPublicKey
       );
       setStatus('success');

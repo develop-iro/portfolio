@@ -68,7 +68,7 @@ const otherLangLabel = lang === 'en' ? 'ES' : 'EN';
           </a>
         </div>
 
-        <ThemeToggle client:load />
+        <ThemeToggle client:only="react" />
         <HamburgerMenu navLinks={navLinks} client:load />
       </div>
     </div>

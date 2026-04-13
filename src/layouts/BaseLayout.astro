@@ -1,6 +1,8 @@
 ---
 import Footer from '../shared/ui/Footer.astro';
 import CustomCursor from '../shared/ui/CustomCursor.astro';
+import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 import type { Lang } from '../shared/i18n/translations';
 import { useTranslations } from '../shared/i18n/translations';
 
@@ -54,6 +56,8 @@ const t = useTranslations(lang);
 
     <CustomCursor />
     <slot />
+    <Analytics />
+    <SpeedInsights />
     <Footer lang={lang} t={t} />
 
     <script is:inline>

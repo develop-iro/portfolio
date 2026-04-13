@@ -11,6 +11,9 @@ dist/
 
 # ── Astro ────────────────────────────────────────────────────────────────────
 .astro/
+.claude/
+.kiro/
+.vscode/
 
 # ── Environment variables  ⚠️  never commit secrets ─────────────────────────
 .env

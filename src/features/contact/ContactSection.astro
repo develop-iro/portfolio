@@ -7,9 +7,9 @@ interface Props {
 }
 const { t } = Astro.props;
 
-const serviceId = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID ?? '';
-const templateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID ?? '';
-const publicKey = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY ?? '';
+const serviceId = import.meta.env.PRIVATE_EMAILJS_SERVICE_ID ?? '';
+const templateId = import.meta.env.PRIVATE_EMAILJS_TEMPLATE_ID ?? '';
+const publicKey = import.meta.env.PRIVATE_EMAILJS_PUBLIC_KEY ?? '';
 ---
 
 <ContactModal

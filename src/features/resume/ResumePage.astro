@@ -23,12 +23,20 @@ const education = [
   {
     degree: {
       en: 'Higher Technician in Web Application Development',
-      es: 'Técnico Superior en Desarrollo de Aplicaciones Web',
+      es: 'Tecnico Superior en Desarrollo de Aplicaciones Web',
     },
     institution: 'IES Virrey Morcillo',
     location: 'Villarrobledo, Spain',
     startDate: '2020-09',
     endDate: '2022-01',
+  },
+];
+
+const certifications = [
+  {
+    name: { en: 'AI Development', es: 'Desarrollo con IA' },
+    institution: 'BIG school',
+    date: '2026-03',
   },
 ];
 
@@ -44,7 +52,6 @@ const proficiencyOrder = { expert: 0, advanced: 1, intermediate: 2, beginner: 3 
 ---
 
 <div class="min-h-screen bg-white dark:bg-gray-900">
-  <!-- Top bar -->
   <div
     class="sticky top-0 z-40 border-b border-gray-200 bg-white/90 backdrop-blur dark:border-gray-700 dark:bg-gray-900/90 print:hidden"
   >
@@ -54,11 +61,10 @@ const proficiencyOrder = { expert: 0, advanced: 1, intermediate: 2, beginner: 3 
         class="shrink-0 text-sm font-medium text-blue-600 hover:underline dark:text-blue-400"
       >
         <span class="hidden sm:inline">{t('resume.back')}</span>
-        <span class="sm:hidden">← {lang === 'en' ? 'Back' : 'Volver'}</span>
+        <span class="sm:hidden">{lang === 'en' ? 'Back' : 'Volver'}</span>
       </a>
 
       <div class="flex items-center gap-2">
-        <!-- Language toggle -->
         <a
           href={`/${otherLang}/resume`}
           class="text-xs font-semibold text-gray-400 transition-colors hover:text-gray-900 dark:text-gray-500 dark:hover:text-white"
@@ -67,7 +73,6 @@ const proficiencyOrder = { expert: 0, advanced: 1, intermediate: 2, beginner: 3 
           {otherLangLabel}
         </a>
 
-        <!-- Print: icon-only on mobile -->
         <button
           onclick="window.print()"
           class="flex items-center gap-1.5 text-sm text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
@@ -79,7 +84,6 @@ const proficiencyOrder = { expert: 0, advanced: 1, intermediate: 2, beginner: 3 
           <span class="hidden sm:inline">{t('resume.print')}</span>
         </button>
 
-        <!-- Download: short label on mobile -->
         <a
           href="/resume.pdf"
           download
@@ -96,16 +100,14 @@ const proficiencyOrder = { expert: 0, advanced: 1, intermediate: 2, beginner: 3 
   </div>
 
   <main class="mx-auto max-w-4xl px-4 py-12 print:max-w-none print:py-0">
-    <!-- Header -->
     <header class="mb-10 print:mb-6">
       <h1 class="text-4xl font-bold text-gray-900 dark:text-white print:text-black">
         Ivan Romero Matallana
       </h1>
       <p class="mt-1 text-xl font-medium text-blue-600 dark:text-blue-400 print:text-blue-700">
-        {lang === 'en' ? 'Frontend Engineer' : 'Ingeniero Frontend'}
+        Senior Frontend Developer
       </p>
 
-      <!-- Contact row -->
       <div
         class="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-500 dark:text-gray-400 print:text-gray-600"
       >
@@ -132,19 +134,18 @@ const proficiencyOrder = { expert: 0, advanced: 1, intermediate: 2, beginner: 3 
         >
           linkedin.com/in/ivan-ccamilo
         </a>
-        <span>Madrid, Spain</span>
+        <span>
+          {lang === 'en' ? 'Villarrobledo, Spain - Remote availability' : 'Villarrobledo, Espana - Disponibilidad remota'}
+        </span>
       </div>
 
       <div class="mt-4 h-px bg-gray-200 dark:bg-gray-700 print:bg-gray-300"></div>
     </header>
 
-    <!-- Two-column layout -->
     <div
       class="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_260px] print:grid-cols-[1fr_220px] print:gap-6"
     >
-      <!-- Left: Summary + Experience + Education -->
       <div class="space-y-10 print:space-y-6">
-        <!-- Summary -->
         <section>
           <h2
             class="mb-3 text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 print:text-blue-700"
@@ -154,13 +155,12 @@ const proficiencyOrder = { expert: 0, advanced: 1, intermediate: 2, beginner: 3 
           <p class="text-sm leading-relaxed text-gray-600 dark:text-gray-300 print:text-gray-700">
             {
               lang === 'en'
-                ? 'Frontend Engineer with 3+ years of production experience building and migrating large-scale web applications. I leverage AI tools (Copilot, Cursor, Codex) to automate repetitive work and ship faster. Active in performance optimisation and code quality. Looking for new challenges at the intersection of frontend and AI automation. Fluent in Spanish and English.'
-                : 'Ingeniero Frontend con más de 3 años de experiencia en producción construyendo y migrando aplicaciones web a gran escala. Utilizo herramientas de IA (Copilot, Cursor, Codex) para automatizar tareas repetitivas y entregar más rápido. Activo en optimización del rendimiento y calidad del código. Buscando nuevos retos en la intersección del frontend y la automatización con IA.'
+                ? 'Senior Frontend Developer specialised in React 18+ and TypeScript 5+, with 4+ years of experience in development, frontend architecture, testing and quality. Experienced in modular design, reusable components and modernisation towards Lit and Web Components, applying hexagonal architecture, SOLID and Clean Code. I bring technical judgement to cross-cutting pieces, code review, mentoring, accessibility and AI agents applied to migrations.'
+                : 'Senior Frontend Developer especializado en React 18+ y TypeScript 5+, con mas de 4 anos de experiencia en desarrollo, arquitectura frontend, testing y calidad. Experiencia en diseno modular, componentes reutilizables y modernizacion hacia Lit y Web Components, aplicando arquitectura hexagonal, SOLID y Clean Code. Aporto criterio tecnico en piezas transversales, code review, mentoring, accesibilidad e IA y agentes aplicados a migraciones.'
             }
           </p>
         </section>
 
-        <!-- Experience -->
         <section>
           <h2
             class="mb-4 text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 print:text-blue-700"
@@ -184,7 +184,7 @@ const proficiencyOrder = { expert: 0, advanced: 1, intermediate: 2, beginner: 3 
                         </span>
                         <span class="text-gray-500 dark:text-gray-400 print:text-gray-600">
                           {' '}
-                          —{' '}
+                          -{' '}
                         </span>
                         <a
                           href={job.url}
@@ -196,7 +196,7 @@ const proficiencyOrder = { expert: 0, advanced: 1, intermediate: 2, beginner: 3 
                         </a>
                       </div>
                       <span class="whitespace-nowrap text-xs text-gray-400 dark:text-gray-500 print:text-gray-500">
-                        {start} – {end}
+                        {start} - {end}
                       </span>
                     </div>
                     <ul class="mt-2 space-y-1">
@@ -213,7 +213,6 @@ const proficiencyOrder = { expert: 0, advanced: 1, intermediate: 2, beginner: 3 
           </div>
         </section>
 
-        <!-- Education -->
         <section>
           <h2
             class="mb-4 text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 print:text-blue-700"
@@ -228,17 +227,15 @@ const proficiencyOrder = { expert: 0, advanced: 1, intermediate: 2, beginner: 3 
                 return (
                   <div>
                     <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5">
-                      <div>
-                        <span class="font-semibold text-gray-900 dark:text-white print:text-black">
-                          {edu.degree[lang]}
-                        </span>
-                      </div>
+                      <span class="font-semibold text-gray-900 dark:text-white print:text-black">
+                        {edu.degree[lang]}
+                      </span>
                       <span class="whitespace-nowrap text-xs text-gray-400 dark:text-gray-500 print:text-gray-500">
-                        {start} – {end}
+                        {start} - {end}
                       </span>
                     </div>
                     <p class="mt-0.5 text-sm text-gray-500 dark:text-gray-400 print:text-gray-600">
-                      {edu.institution} · {edu.location}
+                      {edu.institution} - {edu.location}
                     </p>
                   </div>
                 );
@@ -246,11 +243,36 @@ const proficiencyOrder = { expert: 0, advanced: 1, intermediate: 2, beginner: 3 
             }
           </div>
         </section>
+
+        <section>
+          <h2
+            class="mb-4 text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 print:text-blue-700"
+          >
+            {t('resume.certifications')}
+          </h2>
+          <div class="space-y-4">
+            {
+              certifications.map((cert) => (
+                <div>
+                  <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5">
+                    <span class="font-semibold text-gray-900 dark:text-white print:text-black">
+                      {cert.name[lang]}
+                    </span>
+                    <span class="whitespace-nowrap text-xs text-gray-400 dark:text-gray-500 print:text-gray-500">
+                      {formatDate(cert.date, lang)}
+                    </span>
+                  </div>
+                  <p class="mt-0.5 text-sm text-gray-500 dark:text-gray-400 print:text-gray-600">
+                    {cert.institution}
+                  </p>
+                </div>
+              ))
+            }
+          </div>
+        </section>
       </div>
 
-      <!-- Right: Skills + Languages -->
       <div class="space-y-8 print:space-y-5">
-        <!-- Skills -->
         <section>
           <h2
             class="mb-4 text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 print:text-blue-700"
@@ -292,7 +314,6 @@ const proficiencyOrder = { expert: 0, advanced: 1, intermediate: 2, beginner: 3 
           </div>
         </section>
 
-        <!-- Languages -->
         <section>
           <h2
             class="mb-3 text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 print:text-blue-700"
@@ -301,15 +322,15 @@ const proficiencyOrder = { expert: 0, advanced: 1, intermediate: 2, beginner: 3 
           </h2>
           <ul class="space-y-1.5 text-sm text-gray-600 dark:text-gray-300 print:text-gray-700">
             <li class="flex justify-between">
-              <span>{lang === 'en' ? 'Spanish' : 'Español'}</span>
+              <span>{lang === 'en' ? 'Spanish' : 'Espanol'}</span>
               <span class="text-gray-400 dark:text-gray-500 print:text-gray-500"
                 >{lang === 'en' ? 'Native' : 'Nativo'}</span
               >
             </li>
             <li class="flex justify-between">
-              <span>{lang === 'en' ? 'English' : 'Inglés'}</span>
+              <span>{lang === 'en' ? 'English' : 'Ingles'}</span>
               <span class="text-gray-400 dark:text-gray-500 print:text-gray-500"
-                >{lang === 'en' ? 'Professional' : 'Profesional'}</span
+                >{lang === 'en' ? 'Professional competence' : 'Competencia profesional'}</span
               >
             </li>
           </ul>

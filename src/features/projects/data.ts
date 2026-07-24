@@ -12,6 +12,29 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: 'inversora-app',
+    title: 'Inversora',
+    description: {
+      en: 'Intelligent dashboard for beginner investors to compare index funds through clear rankings, comparative cards, and AI-assisted financial education.',
+      es: 'Dashboard inteligente para inversores principiantes que compara fondos indexados con rankings claros, tarjetas comparativas y educacion financiera asistida por IA.',
+    },
+    longDescription:
+      'Built a full-stack fintech education product for comparing index funds. The mobile-first app uses Expo, React Native, Expo Router, NativeWind, Zustand and Zod, backed by a NestJS API with PostgreSQL, Prisma, scheduled fund-data sync jobs, scoring logic and OpenAI-powered educational assistance.',
+    thumbnail: '/images/projects/inversora-thumbnail-v3.png',
+    techStack: [
+      'Expo',
+      'React Native',
+      'TypeScript',
+      'NestJS',
+      'PostgreSQL',
+      'Prisma',
+      'OpenAI',
+    ],
+    categories: ['Mobile', 'AI', 'Fintech', 'Open Source'],
+    liveUrl: 'https://inversora--inversora.expo.app/',
+    repoUrl: 'https://github.com/develop-iro/inversora-app',
+  },
+  {
     slug: 'lexis-website',
     title: 'Lexis — Accounting Firm Website',
     description: {
@@ -23,6 +46,7 @@ export const projects: Project[] = [
     thumbnail: '/images/projects/lexis.svg',
     techStack: ['Astro', 'React', 'Tailwind CSS', 'Framer Motion', 'Leaflet', 'TypeScript'],
     categories: ['Web', 'Open Source'],
+    liveUrl: 'https://luminous-valkyrie-8b266e.netlify.app/#',
     repoUrl: 'https://github.com/develop-iro/lexis',
   },
   {
@@ -46,20 +70,5 @@ export const projects: Project[] = [
     ],
     categories: ['Web', 'Open Source'],
     repoUrl: 'https://github.com/develop-iro/ReactReview/tree/main/01-gifs-app',
-  },
-  {
-    slug: 'portfolio-website',
-    title: 'Personal Portfolio — iro.dev',
-    description: {
-      en: 'This portfolio site — a statically generated Astro application with React islands, Tailwind CSS dark mode, project filtering, and an EmailJS contact form.',
-      es: 'Este portfolio — una aplicación Astro de generación estática con React islands, modo oscuro con Tailwind CSS, filtrado de proyectos y formulario de contacto con EmailJS.',
-    },
-    longDescription:
-      "Designed and built from scratch using Astro's partial hydration model to ship near-zero JavaScript by default. Features include dark/light mode with localStorage persistence, client-side project filtering, a validated contact form powered by EmailJS, and a fully responsive layout tested across 320 px–2560 px viewports.",
-    thumbnail: '/images/projects/portfolio.svg',
-    techStack: ['Astro', 'React', 'TypeScript', 'Tailwind CSS', 'EmailJS', 'Vitest', 'fast-check'],
-    categories: ['Web', 'Open Source'],
-    liveUrl: 'https://ivanromero.dev',
-    repoUrl: 'https://github.com/develop-iro',
   },
 ];

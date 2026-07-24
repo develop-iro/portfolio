@@ -99,8 +99,6 @@ function CardContent({
           {project.liveUrl && (
             <a
               href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
               className="flex items-center gap-1 text-sm text-blue-600 hover:underline dark:text-blue-400"
             >
               <svg
@@ -124,8 +122,6 @@ function CardContent({
           {project.repoUrl && (
             <a
               href={project.repoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
               className="flex items-center gap-1 text-sm text-blue-600 hover:underline dark:text-blue-400"
             >
               <svg
@@ -163,17 +159,38 @@ export default function ProjectFilter({ projects, categories, lang, liveDemo, re
     const el = scrollRef.current;
     if (!el) return;
     const onScroll = () => {
-      const index = Math.round(el.scrollLeft / el.offsetWidth);
-      setActiveIndex(index);
+      const children = Array.from(el.children) as HTMLElement[];
+      if (children.length === 0) return;
+      const closestIndex = children.reduce(
+        (closest, child, index) => {
+          const left = child.offsetLeft - el.offsetLeft;
+          const distance = Math.abs(el.scrollLeft - left);
+          return distance < closest.distance ? { index, distance } : closest;
+        },
+        { index: 0, distance: Number.POSITIVE_INFINITY }
+      ).index;
+      setActiveIndex(closestIndex);
     };
     el.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
     return () => el.removeEventListener('scroll', onScroll);
   }, [filtered]);
+
+  function scrollToProject(index: number) {
+    const el = scrollRef.current;
+    const child = el?.children[index] as HTMLElement | undefined;
+    if (!el || !child) return;
+    setActiveIndex(index);
+    el.scrollTo({
+      left: child.offsetLeft - el.offsetLeft,
+      behavior: 'smooth',
+    });
+  }
 
   function selectCategory(cat: string) {
     setSelectedCategory(cat);
     setActiveIndex(0);
-    if (scrollRef.current) scrollRef.current.scrollLeft = 0;
+    scrollToProject(0);
   }
 
   return (
@@ -217,20 +234,61 @@ export default function ProjectFilter({ projects, categories, lang, liveDemo, re
 
       {/* Dot indicators — mobile only */}
       {filtered.length > 1 && (
-        <div className="mt-4 flex justify-center gap-1.5 sm:hidden">
-          {filtered.map((_, i) => (
-            <button
-              key={i}
-              aria-label={`Project ${i + 1}`}
-              onClick={() => {
-                scrollRef.current?.scrollTo({
-                  left: i * scrollRef.current.offsetWidth,
-                  behavior: 'smooth',
-                });
-              }}
-              className={`rounded-full transition-all duration-300 ${i === activeIndex ? 'h-2 w-5 bg-blue-500' : 'h-2 w-2 bg-gray-300 dark:bg-gray-600'}`}
-            />
-          ))}
+        <div className="mt-4 flex items-center justify-center gap-4 sm:hidden">
+          <button
+            type="button"
+            aria-label={lang === 'es' ? 'Proyecto anterior' : 'Previous project'}
+            disabled={activeIndex === 0}
+            onClick={() => scrollToProject(Math.max(activeIndex - 1, 0))}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm transition-colors hover:border-blue-400 hover:text-blue-600 disabled:cursor-not-allowed disabled:opacity-40 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:border-blue-400 dark:hover:text-blue-300"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+
+          <div className="flex items-center justify-center gap-1.5">
+            {filtered.map((_, i) => (
+              <button
+                key={i}
+                aria-label={`Project ${i + 1}`}
+                onClick={() => scrollToProject(i)}
+                className={`rounded-full transition-all duration-300 ${i === activeIndex ? 'h-2 w-5 bg-blue-500' : 'h-2 w-2 bg-gray-300 dark:bg-gray-600'}`}
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            aria-label={lang === 'es' ? 'Proyecto siguiente' : 'Next project'}
+            disabled={activeIndex === filtered.length - 1}
+            onClick={() => scrollToProject(Math.min(activeIndex + 1, filtered.length - 1))}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm transition-colors hover:border-blue-400 hover:text-blue-600 disabled:cursor-not-allowed disabled:opacity-40 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:border-blue-400 dark:hover:text-blue-300"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
         </div>
       )}
 

@@ -21,7 +21,7 @@ interface Props {
 
 const {
   title,
-  description = 'Personal portfolio of Ivan Romero, Frontend Engineer.',
+  description = 'Personal portfolio of Ivan Romero, Senior Frontend Developer.',
   lang,
   ogImage,
   alternates,
@@ -37,7 +37,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Ivan Romero',
-  jobTitle: lang === 'es' ? 'Ingeniero Frontend' : 'Frontend Engineer',
+  jobTitle: 'Senior Frontend Developer',
   url: Astro.site?.href ?? 'https://ivan-romero.dev',
   sameAs: ['https://github.com/develop-iro', 'https://www.linkedin.com/in/ivan-ccamilo/'],
 };

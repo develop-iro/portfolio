@@ -12,6 +12,30 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: 'meet-talk',
+    title: 'Meet-talk',
+    description: {
+      en: 'Meeting transcription product that turns recordings into Notion-ready notes, with a web app, Google Drive hub, Chrome extension and AI-powered processing pipeline.',
+      es: 'Producto de transcripcion de reuniones que convierte grabaciones en notas listas para Notion, con app web, hub de Google Drive, extension de Chrome y pipeline con IA.',
+    },
+    longDescription:
+      'Built a meeting transcription and productivity workflow with Next.js, React, TypeScript, OpenAI, Notion API, Google Drive integration and a Chrome extension. The system processes meeting audio, extracts transcription-ready content, supports Drive-based workflows, and generates structured notes designed to be moved into Notion.',
+    thumbnail: '/images/projects/meet-talk-thumbnail.png',
+    techStack: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'OpenAI',
+      'Notion API',
+      'Google Drive',
+      'Chrome Extension',
+      'Railway',
+    ],
+    categories: ['Web', 'AI', 'Productivity', 'Open Source'],
+    liveUrl: 'https://meet-talk-production.up.railway.app/',
+    repoUrl: 'https://github.com/develop-iro/meet-talk',
+  },
+  {
     slug: 'inversora-app',
     title: 'Inversora',
     description: {
